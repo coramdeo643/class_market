@@ -32,6 +32,8 @@ class _MainScreenState extends State<MainScreen> {
           BottomNavigationBarItem(
               label: 'Home', icon: Icon(CupertinoIcons.home)),
           BottomNavigationBarItem(
+              label: 'Life', icon: Icon(CupertinoIcons.news)),
+          BottomNavigationBarItem(
               label: 'Chat', icon: Icon(CupertinoIcons.chat_bubble)),
           BottomNavigationBarItem(
               label: 'Near me', icon: Icon(CupertinoIcons.placemark)),
