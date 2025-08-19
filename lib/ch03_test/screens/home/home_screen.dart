@@ -41,6 +41,7 @@ class HomeScreen extends StatelessWidget {
             endIndent: 16,
             thickness: .5,
             height: .5,
+            color: Colors.orange,
           );
         },
         itemCount: productList.length,
