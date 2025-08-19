@@ -1,7 +1,6 @@
 import 'package:class_market/ch01/theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../../models/product.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -11,23 +10,46 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Row(
           children: [
-            const Text("전포동"),
-            const SizedBox(
-              width: 4,
-            ),
+            const Text("New York"),
+            const SizedBox(width: 8),
             IconButton(
-              icon: Icon(CupertinoIcons.chevron_down),
-              onPressed: () {},
-            ),
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text("List of Neighborhoods is coming..."),
+                    duration: Duration(seconds: 1),
+                  ));
+                },
+                icon: Icon(CupertinoIcons.chevron_down)),
           ],
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.search)),
-          IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.list_dash)),
-          IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.bell)),
+          IconButton(
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("Search is coming..."),
+                  duration: Duration(seconds: 1),
+                ));
+              },
+              icon: Icon(CupertinoIcons.search)),
+          IconButton(
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("Lists is coming..."),
+                  duration: Duration(seconds: 1),
+                ));
+              },
+              icon: Icon(CupertinoIcons.list_dash)),
+          IconButton(
+              onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("Notice is coming..."),
+                  duration: Duration(seconds: 1),
+                ));
+              },
+              icon: Icon(CupertinoIcons.bell))
         ],
         bottom: PreferredSize(
-            preferredSize: Size.fromHeight(0.5),
+            preferredSize: Size.fromHeight(.5),
             child: Divider(
               thickness: 1,
               height: 1,
@@ -35,41 +57,30 @@ class HomeScreen extends StatelessWidget {
             )),
       ),
       body: ListView.separated(
-        separatorBuilder: (context, index) {
-          return Divider(
-            indent: 16,
-            endIndent: 16,
-            thickness: .5,
-            height: .5,
-            color: Colors.orange,
-          );
-        },
-        itemCount: productList.length,
-        itemBuilder: (context, index) {
-          final product = productList[index];
-          return Container(
-            padding: const EdgeInsets.all(16),
-            height: 135,
-            child: Row(
-              children: [
-                // Image
-                ClipRRect(
+          itemBuilder: (context, index) {
+            final product = productList[index];
+            return Container(
+              padding: const EdgeInsets.all(16),
+              height: 128,
+              child: Row(
+                children: [
+                  ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Image.network(
                       product.urlToImage,
-                      width: 115,
-                      height: 115,
+                      width: 128,
+                      height: 128,
                       fit: BoxFit.cover,
-                    )),
-                const SizedBox(width: 16),
-                // Desc.
-                Expanded(
-                  child: Column(
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                      child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(product.title, style: textTheme().bodyLarge),
                       const SizedBox(height: 4),
-                      Text("${product.address} • ${product.publishedAt}"),
+                      Text("${product.address} / ${product.publishedAt}"),
                       const SizedBox(height: 4),
                       Text("\$ ${product.price}"),
                       const Spacer(),
@@ -90,19 +101,20 @@ class HomeScreen extends StatelessWidget {
                         ],
                       )
                     ],
-                  ),
-                )
-              ],
-            ),
-          );
-        },
-      ),
+                  ))
+                ],
+              ),
+            );
+          },
+          separatorBuilder: (context, index) {
+            return Divider(
+              indent: 24,
+              endIndent: 24,
+            );
+          },
+          itemCount: productList.length),
     );
   }
-  // String numberFormat(String price) {
-  //   final formatter = NumberFormat('#,###');
-  //   return formatter.format(int.parse(price));
-  // }
 
   Widget _buildIcons(int count, IconData iconData) {
     return Row(
